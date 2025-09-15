@@ -1,0 +1,7 @@
+@baseUrl = http://localhost:3000
+
+# MESSAGES
+###
+GET {{baseUrl}}/messages
+###
+GET {{baseUrl}}/messages/{{id}}
