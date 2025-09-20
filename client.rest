@@ -5,25 +5,30 @@
 GET {{baseUrl}}/messages
 
 ### list messages for user with id
-GET {{baseUrl}}/messages/13
+GET {{baseUrl}}/messages/1
 
 ### Create a new message
 POST {{baseUrl}}/messages
 Content-Type: application/json
 
 {
-  "message": "This is the message!",
-  "userId": 1
+  "text": "new message",
+  "from": "User1",
+  "to": "User2",
+  "read": false,
+  "createdAt": "2025-09-20T17:00:00.000Z"
 }
-
 ### update a message with id
-PATCH {{baseUrl}}/messages/13
+PATCH {{baseUrl}}/messages/2
 Content-Type: application/json
 
 {
-  "message": "This is the message!",
-  "userId": 1
+  "text": "new message",
+  "from": "User1",
+  "to": "User2",
+  "read": false,
+  "createdAt": "2025-09-20T17:00:00.000Z"
 }
 
 ### delete a message with id
-DELETE {{baseUrl}}/messages/13
+DELETE {{baseUrl}}/messages/2

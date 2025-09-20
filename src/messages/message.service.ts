@@ -1,8 +1,57 @@
 import { Injectable } from '@nestjs/common';
+import { messageEntity } from './entities/message.entity';
 
 @Injectable()
 export class MessageService {
-  hello() {
-    return 'Hello World';
+  private lastId = 1;
+  private message: messageEntity[] = [
+    {
+      id: 1,
+      text: 'Hello World',
+      from: 'User1',
+      to: 'User2',
+      read: false,
+      createdAt: new Date(),
+    },
+  ];
+  findAll() {
+    return this.message;
+  }
+  findOne(id: string) {
+    return this.message.find((item) => item.id === +id);
+  }
+  create(body: any) {
+    this.lastId++;
+    const id = this.lastId;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const newMessage = { id, ...body };
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    this.message.push(newMessage);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return newMessage;
+  }
+
+  remove(id: string) {
+    const messageExistIndex = this.message.findIndex((item) => item.id === +id);
+    if (messageExistIndex >= 0) {
+      const deleted = this.message[messageExistIndex];
+      this.message.splice(messageExistIndex, 1);
+      return deleted;
+    }
+    return null;
+  }
+  update(id: string, body: any) {
+    const messageExistIndex = this.message.findIndex((item) => item.id === +id);
+    if (messageExistIndex >= 0) {
+      const oldMessage = this.message[messageExistIndex];
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const updated = { ...oldMessage, ...body };
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      this.message[messageExistIndex] = updated;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      return updated;
+    }
+    return null;
   }
 }
