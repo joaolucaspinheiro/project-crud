@@ -24,3 +24,6 @@ Content-Type: application/json
   "message": "This is the message!",
   "userId": 1
 }
+
+### delete a message with id
+DELETE {{baseUrl}}/messages/13

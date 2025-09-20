@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { MessagesService } from './messages.service';
 
 @Controller('messages')
@@ -22,5 +30,10 @@ export class MessagesController {
   update(@Param('id') id: string, @Body() body: any) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return { id, ...body };
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return `message with id ${id} deleted`;
   }
 }
