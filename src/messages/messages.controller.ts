@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { MessagesService } from './messages.service';
 
 @Controller('messages')
@@ -10,6 +10,17 @@ export class MessagesController {
   }
   @Get(':id')
   findOne(@Param('id') id: number) {
-    return this.messagesService.findOne(+id);
+    return `Returning  id: ${id}`;
+  }
+
+  @Post()
+  create(@Body('message') body: any) {
+    return `message "${body}" created`;
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() body: any) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return { id, ...body };
   }
 }

@@ -1,7 +1,26 @@
 @baseUrl = http://localhost:3000
 
 # MESSAGES
-###
+### List all messages
 GET {{baseUrl}}/messages
-###
-GET {{baseUrl}}/messages/{{id}}
+
+### list messages for user with id
+GET {{baseUrl}}/messages/13
+
+### Create a new message
+POST {{baseUrl}}/messages
+Content-Type: application/json
+
+{
+  "message": "This is the message!",
+  "userId": 1
+}
+
+### update a message with id
+PATCH {{baseUrl}}/messages/13
+Content-Type: application/json
+
+{
+  "message": "This is the message!",
+  "userId": 1
+}
