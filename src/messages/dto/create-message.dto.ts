@@ -6,9 +6,11 @@ export class CreateMessageDto {
   @MinLength(5)
   @MaxLength(255)
   readonly text: string;
+
   @IsString()
   @IsNotEmpty()
   readonly from: string;
+
   @IsString()
   @IsNotEmpty()
   readonly to: string;
