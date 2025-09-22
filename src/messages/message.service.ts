@@ -14,12 +14,13 @@ export class MessageService {
       createdAt: new Date(),
     },
   ];
-  findAll() {
-    return this.message;
-  }
   throwNotFoundException() {
     throw new NotFoundException(`message not found`);
   }
+  findAll() {
+    return this.message;
+  }
+
   findOne(id: string) {
     const message = this.message.find((item) => item.id === +id);
     if (message) return message;
