@@ -8,6 +8,9 @@ import {
   Post,
 } from '@nestjs/common';
 import { MessageService } from './message.service';
+import { CreateMessageDto } from './dto/create-message.dto';
+
+class UpdateMessageDto {}
 
 @Controller('messages')
 export class MessagesController {
@@ -22,15 +25,13 @@ export class MessagesController {
   }
 
   @Post()
-  create(@Body() body: any) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return this.messageService.create(body);
+  create(@Body() createMessageDto: CreateMessageDto) {
+    return this.messageService.create(createMessageDto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body: any) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return this.messageService.update(id, body);
+  update(@Param('id') id: string, @Body() UpdateMessageDto: UpdateMessageDto) {
+    return this.messageService.update(id, UpdateMessageDto);
   }
 
   @Delete(':id')

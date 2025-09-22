@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { messageEntity } from './entities/message.entity';
+import { CreateMessageDto } from './dto/create-message.dto';
+import { UpdateMessageDto } from './dto/update-message.dto';
 
 @Injectable()
 export class MessageService {
@@ -26,15 +28,17 @@ export class MessageService {
     if (message) return message;
     this.throwNotFoundException();
   }
-  create(body: any) {
+  create(CreateMessageDto: CreateMessageDto) {
     this.lastId++;
     const id = this.lastId;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const newMessage = { id, ...body };
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    this.message.push(newMessage);
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    const newMessage = {
+      id,
+      ...CreateMessageDto,
+      read: false,
+      createdAt: new Date(),
+    };
+    this.message.push(newMessage);
     return newMessage;
   }
 
@@ -47,15 +51,12 @@ export class MessageService {
     }
     this.throwNotFoundException();
   }
-  update(id: string, body: any) {
+  update(id: string, UpdateMessageDto: UpdateMessageDto) {
     const messageExistIndex = this.message.findIndex((item) => item.id === +id);
     if (messageExistIndex >= 0) {
       const oldMessage = this.message[messageExistIndex];
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const updated = { ...oldMessage, ...body };
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const updated = { ...oldMessage, ...UpdateMessageDto };
       this.message[messageExistIndex] = updated;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return updated;
     }
     this.throwNotFoundException();
