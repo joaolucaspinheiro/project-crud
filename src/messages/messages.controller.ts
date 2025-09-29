@@ -24,8 +24,7 @@ export class MessagesController {
     return this.messageService.findOne(id);
   }
 
-  @Post()
-  create(@Body() createMessageDto: CreateMessageDto) {
+  @Post() create(@Body() createMessageDto: CreateMessageDto) {
     return this.messageService.create(createMessageDto);
   }
 
