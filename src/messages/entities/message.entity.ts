@@ -5,8 +5,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-@Entity()
-export class messageEntity {
+@Entity('messages')
+export class Message {
   @PrimaryGeneratedColumn()
   id: number;
   @Column({ type: 'varchar' })
@@ -22,4 +22,3 @@ export class messageEntity {
   @UpdateDateColumn()
   updatedAt?: Date;
 }
-export class message {}
