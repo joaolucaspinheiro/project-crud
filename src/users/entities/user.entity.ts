@@ -18,7 +18,7 @@ export class User {
   @Column()
   passwordHash: string;
 
-  @Column()
+  @Column({ unique: true })
   @IsEmail()
   email: string;
 

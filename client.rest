@@ -32,3 +32,22 @@ Content-Type: application/json
 
 ### delete a message with id
 DELETE {{baseUrl}}/messages/1
+
+
+# USERS
+
+### List all users
+GET {{baseUrl}}/users
+
+### Get user by id
+GET {{baseUrl}}/users/1
+
+### Create a new user
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "username": "newuser",
+  "email": "user@gmail.com",
+    "password": "password123"
+}
