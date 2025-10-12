@@ -51,3 +51,12 @@ Content-Type: application/json
   "email": "user@gmail.com",
     "password": "password123"
 }
+
+### update a user with id
+PATCH {{baseUrl}}/users/1
+Content-Type: application/json
+{
+  "username": "updateduser",
+}
+### delete a user with id
+DELETE {{baseUrl}}/users/4
