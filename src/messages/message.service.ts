@@ -39,6 +39,17 @@ export class MessageService {
     const messageId = parseInt(id, 10);
     const message = await this.messageRepository.find({
       where: { id: messageId },
+      relations: ['from', 'to'],
+      select: {
+        from: {
+          id: true,
+          username: true,
+        },
+        to: {
+          id: true,
+          username: true,
+        },
+      },
     });
     if (message) return message;
     this.throwNotFoundException();
