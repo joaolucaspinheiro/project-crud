@@ -13,8 +13,8 @@ Content-Type: application/json
 
 {
   "text": "new message",
-  "from": "User1",
-  "to": "User2",
+  "from": 9,
+  "to": 9,
   "read": false,
   "createdAt": "2025-09-20T17:00:00.000Z"
 }
@@ -24,8 +24,8 @@ Content-Type: application/json
 
 {
   "text": "new message",
-  "from": "User1",
-  "to": "User2",
+  "from": 9,
+  "to": 9,
   "read": false,
   "createdAt": "2025-09-20T17:00:00.000Z"
 }
