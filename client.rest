@@ -19,15 +19,12 @@ Content-Type: application/json
   "createdAt": "2025-09-20T17:00:00.000Z"
 }
 ### update a message with id
-PATCH {{baseUrl}}/messages/1
+PATCH {{baseUrl}}/messages/2
 Content-Type: application/json
 
 {
-  "text": "new message",
-  "from": 9,
-  "to": 9,
-  "read": false,
-  "createdAt": "2025-09-20T17:00:00.000Z"
+  "text": "Hello newUser! ",
+  "read": true
 }
 
 ### delete a message with id

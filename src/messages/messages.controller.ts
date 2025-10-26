@@ -6,9 +6,11 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { MessageService } from './message.service';
 import { CreateMessageDto } from './dto/create-message.dto';
+import { PaginationDto } from '../common/dto/pagination.dto';
 
 class UpdateMessageDto {}
 
@@ -16,8 +18,8 @@ class UpdateMessageDto {}
 export class MessagesController {
   constructor(private readonly messageService: MessageService) {}
   @Get()
-  findAll() {
-    return this.messageService.findAll();
+  async findAll(@Query() paginationDto: PaginationDto) {
+    return this.messageService.findAll(paginationDto);
   }
   @Get(':id')
   findOne(@Param('id') id: string) {

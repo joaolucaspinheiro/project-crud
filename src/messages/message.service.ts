@@ -5,7 +5,7 @@ import { UpdateMessageDto } from './dto/update-message.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsersService } from '../users/users.service';
-
+import { PaginationDto } from '../common/dto/pagination.dto';
 @Injectable()
 export class MessageService {
   constructor(
@@ -16,8 +16,11 @@ export class MessageService {
   throwNotFoundException() {
     throw new NotFoundException(`message not found`);
   }
-  async findAll() {
+  async findAll(PaginationDto: PaginationDto = {}) {
+    const { limit = 10, offset = 0 } = PaginationDto;
     return await this.messageRepository.find({
+      take: limit, // Items per page
+      skip: offset, // Items to skip
       relations: ['from', 'to'],
       select: {
         from: {
@@ -37,7 +40,7 @@ export class MessageService {
 
   async findOne(id: string) {
     const messageId = parseInt(id, 10);
-    const message = await this.messageRepository.find({
+    const message = await this.messageRepository.findOne({
       where: { id: messageId },
       relations: ['from', 'to'],
       select: {
@@ -85,14 +88,13 @@ export class MessageService {
   }
 
   async update(id: string, UpdateMessageDto: UpdateMessageDto) {
-    const messageId = parseInt(id, 10);
-    const message = await this.messageRepository.preload({
-      id: messageId,
-      ...UpdateMessageDto,
-    });
+    const message = await this.findOne(id);
     if (!message) {
-      throw new NotFoundException(`Message with ID #${id} not found`);
+      return this.throwNotFoundException();
+    } else {
+      message.text = UpdateMessageDto.text ?? message.text;
+      message.read = UpdateMessageDto.read ?? message.read;
+      return this.messageRepository.save(message);
     }
-    return this.messageRepository.save(message);
   }
 }

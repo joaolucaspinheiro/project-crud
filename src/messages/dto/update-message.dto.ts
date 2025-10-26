@@ -3,4 +3,5 @@ import { CreateMessageDto } from './create-message.dto';
 
 export class UpdateMessageDto extends PartialType(CreateMessageDto) {
   readonly text?: string;
+  readonly read?: boolean;
 }
